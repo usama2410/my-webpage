@@ -1,0 +1,206 @@
+.App {
+  background-color: white;
+  height: 100vh;
+}
+.main {
+  height: 40vh;
+  background-color: #eaf8fc;
+}
+.payment-btn {
+  width: 72px;
+  height: 28px;
+  background-color: #f03458;
+  border-radius: 6px;
+  padding: 1px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: capitalize;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+}
+.payment-btn-two {
+  width: 72px;
+  height: 28px;
+  background-color: #fb6139;
+  border-radius: 6px;
+  padding: 1px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: capitalize;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+}
+.payment-btn-three {
+  width: 72px;
+  height: 28px;
+  background-color: #fdd600;
+  border-radius: 6px;
+  padding: 1px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: capitalize;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+}
+.payment-btn-four {
+  width: 72px;
+  height: 28px;
+  background-color: #7cd3e2;
+  border-radius: 6px;
+  padding: 1px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: capitalize;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+}
+.payment-btn-five {
+  width: 72px;
+  height: 28px;
+  background-color: #d0d2d5;
+  border-radius: 6px;
+  padding: 1px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: capitalize;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+}
+.Chart-card-line {
+  background-color: #1a1e4d;
+  color: white;
+  padding: 20px;
+  border-radius: 5px;
+  -webkit-box-shadow: 2px 3px 15px 2px rgba(0, 0, 0, 0.9);
+  box-shadow: 2px 3px 15px 2px rgba(0, 0, 0, 0.9);
+}
+.Chart-card-line-2 {
+  background-color: white;
+  color: black;
+  padding: 20px;
+  border-radius: 5px;
+  -webkit-box-shadow: 2px 3px 15px 2px rgba(0, 0, 0, 0.9);
+  box-shadow: 2px 3px 15px 2px rgba(0, 0, 0, 0.9);
+}
+.postion {
+  position: absolute;
+  top: 20%;
+}
+.chart-heading-overview {
+  font-size: 10px;
+  color: #d0d2d5;
+  text-transform: uppercase;
+}
+.chart-heading {
+  text-transform: capitalize;
+  font-size: 20px;
+  font-weight: 600;
+}
+.btn-align {
+  justify-content: end;
+  display: flex;
+  align-items: flex-end;
+}
+.chart-btn-active {
+  width: 79px;
+  height: 33px;
+  text-transform: capitalize;
+  text-align: center;
+  font-size: 16px;
+  border-radius: 5px;
+  background-color: #5c6fda;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+  cursor: pointer;
+}
+.chart-heading-right {
+  display: flex;
+  justify-content: flex-end;
+}
+.chart-btn-disable {
+  width: 79px;
+  height: 33px;
+  text-transform: capitalize;
+  text-align: center;
+  font-size: 16px;
+  border-radius: 5px;
+  background-color: #fafdff;
+  color: #5c6fda;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+.width {
+  width: 100%;
+  padding: 20px;
+}
+.card-name {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #9fa8b1;
+}
+.card-number {
+  color: black;
+  font-weight: bold;
+  font-size: 18px;
+  padding-top: 5px;
+}
+.green-value {
+  color: #a5ecd2;
+  font-size: 12px;
+  padding-top: 10px;
+}
+.orange-value {
+  color: #f26e46;
+  font-size: 12px;
+  padding-top: 10px;
+}
+.red-value {
+  color: #ed395f;
+  font-size: 12px;
+  padding-top: 10px;
+}
+.center {
+  display: flex;
+  justify-content: center;
+}
+.card-date {
+  font-size: 12px;
+  color: #d0d2d5;
+}
+/* Cards */
+.card-1 {
+  width: 90%;
+  background-color: white;
+  color: black;
+  height: 104px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  padding: 14px;
+  margin-top: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+  .main {
+    height: 80vh;
+  }
+  .postion {
+    position: relative;
+  }
+  .width {
+    padding: 0%;
+    width: 102%;
+  }
+}
