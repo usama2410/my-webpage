@@ -19,6 +19,19 @@
   text-align: center;
   cursor: pointer;
 }
+
+.modal-dialog {
+  margin: 20px !important;
+}
+
+.my-modal > .modal-content {
+  width: 96vw !important; /* Occupy the 90% of the screen width */
+  /* max-width: 90vw !important; */
+  height: 95vh !important;
+}
+.close {
+  display: none !important;
+}
 .payment-btn-two {
   width: 72px;
   height: 28px;
@@ -113,7 +126,8 @@
   text-align: center;
   font-size: 16px;
   border-radius: 5px;
-  background-color: #5c6fda;
+  background-color: #fafdff;
+  color: #5c6fda;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -137,6 +151,38 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+}
+.chart-btn-view {
+  width: 99px;
+  height: 33px;
+  text-transform: capitalize;
+  text-align: center;
+  font-size: 16px;
+  border-radius: 5px;
+  background-color: #5c6fda;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-left: 10px;
+  /* padding: 10px; */
+}
+.chart-btn-view-total-orders {
+  width: 99px;
+  height: 33px;
+  text-transform: capitalize;
+  text-align: center;
+  font-size: 16px;
+  border-radius: 5px;
+  background-color: #fc7e09;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-left: 10px;
+  /* padding: 10px; */
 }
 .App-logo {
   height: 40vmin;

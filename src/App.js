@@ -3,12 +3,15 @@ import { Bar, Line } from "react-chartjs-2";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import moment from "moment";
+import { Button, Modal } from "react-bootstrap";
+// require("./RoundedBars");
 function App() {
   const [items, setitems] = useState([]);
   const [time, settime] = useState([]);
   const [days, setDays] = useState([]);
   const [showDays, setShowDays] = useState(true);
-
+  const [modalShow, setModalShow] = useState(false);
+  const [modalShow2, setModalShow2] = useState(false);
   useEffect(() => {
     axios
       .get(
@@ -37,7 +40,8 @@ function App() {
   items.map((f) =>
     f.latency <= items.length ? showLatency.push(f.latency) : null
   );
-
+  const handleClose = () => setModalShow(false);
+  const handleClose2 = () => setModalShow2(false);
   // items.map((f) => f.time === showdate.push(f.time));
   // console.log("dateeee", showdate);
 
@@ -125,7 +129,7 @@ function App() {
                   </div>
                 </div>
               </div>
-              <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12 center">
+              <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12 center pt-20">
                 {" "}
                 <div className="card-1">
                   <div className="row">
@@ -146,6 +150,7 @@ function App() {
           </div>
         </div>
       </div>
+
       <div className="graph-main ">
         <div className="row width postion">
           <div className="col-lg-8 col-md-6 col-sm-12 col-xs-12 ">
@@ -169,6 +174,12 @@ function App() {
                     >
                       Hours
                     </div>
+                    <div
+                      className="chart-btn-view"
+                      onClick={() => setModalShow(true)}
+                    >
+                      View More
+                    </div>
                   </h3>
                 </div>
               </div>
@@ -179,9 +190,11 @@ function App() {
                     width={1990}
                     data={{
                       labels: showDays ? days : time,
-
+                      // labels: ["feb", "dec", "gen"],
                       datasets: [
                         {
+                          label: "Sale value",
+                          lineTension: 0,
                           fill: false,
                           borderColor: "#626ed7",
                           backgroundColor: "#626ed7",
@@ -190,11 +203,16 @@ function App() {
                           pointHoverBackgroundColor: "#55bae7",
                           pointHoverBorderColor: "#55bae7",
                           data: showLatency,
+                          // data: [22, 66, 88, 99],
                           pointRadius: 0,
                         },
                       ],
                     }}
                     options={{
+                      bezierCurve: false,
+                      line: {
+                        tension: 0, // disables bezier curves
+                      },
                       tooltips: {
                         callbacks: {
                           label: function (tooltipItem) {
@@ -218,6 +236,7 @@ function App() {
                               // },
                               stepSize: 5,
                               beginAtZero: true,
+                              fontColor: "red",
                             },
                             gridLines: {
                               borderDash: [2],
@@ -236,13 +255,13 @@ function App() {
                               // zeroLineColor: "transparent",
                               display: false,
                             },
-                            ticks: {
-                              fontColor: "#red", // this here
-                            },
                           },
                         ],
                       },
                       elements: {
+                        line: {
+                          tension: 0,
+                        },
                         point: {
                           radius: 0,
                         },
@@ -254,6 +273,9 @@ function App() {
                       labels: {
                         usePointStyle: true,
                         boxWidth: 50,
+                        font: {
+                          size: 17,
+                        },
                       },
                     }}
                   />
@@ -271,7 +293,14 @@ function App() {
                   <h3 className="chart-heading">Total orders</h3>
                 </div>
                 <div className="col-6 right">
-                  <h3 className="chart-heading-right"></h3>
+                  <h3 className="chart-heading-right">
+                    <div
+                      className="chart-btn-view-total-orders "
+                      onClick={() => setModalShow2(true)}
+                    >
+                      View More
+                    </div>
+                  </h3>
                 </div>
               </div>
               <div>
@@ -280,12 +309,14 @@ function App() {
                     height={300}
                     width={800}
                     data={{
-                      labels: showDays ? days : time,
+                      // labels: showDays ? days : time,
+                      labels: ["feb", "MAr", "feb", "MAr"],
                       datasets: [
                         {
                           label: "Total orders",
                           data: showLatency,
                           backgroundColor: "#FC7E09",
+                          borderRadius: 12,
                         },
 
                         // {
@@ -301,6 +332,21 @@ function App() {
                       ],
                     }}
                     options={{
+                      scales: {
+                        yAxes: [
+                          {
+                            ticks: {
+                              beginAtZero: true,
+                            },
+                          },
+                        ],
+                        xAxes: [
+                          {
+                            // Change here
+                            barPercentage: 0.2,
+                          },
+                        ],
+                      },
                       tooltips: {
                         callbacks: {
                           title: function (tooltipItem, data) {
@@ -338,35 +384,6 @@ function App() {
                       cornerRadius: 20,
                       responsive: true,
                       maintainAspectRatio: false,
-                      scales: {
-                        yAxes: [
-                          {
-                            ticks: {
-                              // callback: function (value) {
-                              //   return "$ " + numeral(value).format("0.0a");
-                              // },
-                              stepSize: 250,
-                              beginAtZero: true,
-                            },
-                            gridLines: {
-                              borderDash: [2],
-                              zeroLineColor: "transparent",
-                              zeroLineWidth: 0,
-                              tickMarkLength: 15,
-                            },
-                          },
-                        ],
-                        xAxes: [
-                          {
-                            // barThickness: 10,
-                            barPercentage: 0.3,
-                            gridLines: {
-                              lineWidth: 0,
-                              zeroLineColor: "transparent",
-                            },
-                          },
-                        ],
-                      },
                     }}
                     legend={{
                       display: true,
@@ -385,6 +402,266 @@ function App() {
           </div>
         </div>
       </div>
+
+      <Modal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        size="xd"
+        // aria-labelledby="contained-modal-title-vcenter"
+        centered
+        dialogClassName="my-modal"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Sales Value
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {items.length !== 0 ? (
+            <Line
+              height={300}
+              width={1990}
+              data={{
+                labels: showDays ? days : time,
+                // labels: ["feb", "dec", "gen"],
+                datasets: [
+                  {
+                    label: "Sale value",
+                    lineTension: 0,
+                    fill: false,
+                    borderColor: "#626ed7",
+                    backgroundColor: "#626ed7",
+                    pointBackgroundColor: "#55bae7",
+                    pointBorderColor: "#55bae7",
+                    pointHoverBackgroundColor: "#55bae7",
+                    pointHoverBorderColor: "#55bae7",
+                    data: showLatency,
+                    // data: [22, 66, 88, 99],
+                    pointRadius: 0,
+                  },
+                ],
+              }}
+              options={{
+                bezierCurve: false,
+                line: {
+                  tension: 0, // disables bezier curves
+                },
+                tooltips: {
+                  callbacks: {
+                    label: function (tooltipItem) {
+                      return tooltipItem.yLabel;
+                    },
+                  },
+                },
+                legend: {
+                  display: false,
+                },
+
+                cornerRadius: 20,
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                  yAxes: [
+                    {
+                      ticks: {
+                        // callback: function (value) {
+                        //   return "$ " + numeral(value).format("0.0a");
+                        // },
+                        stepSize: 5,
+                        beginAtZero: true,
+                        fontColor: "red",
+                      },
+                      gridLines: {
+                        borderDash: [2],
+                        zeroLineColor: "transparent",
+                        zeroLineWidth: 0,
+                        tickMarkLength: 15,
+                      },
+                    },
+                  ],
+                  xAxes: [
+                    {
+                      // barThickness: 10,
+                      barPercentage: 0.7,
+                      gridLines: {
+                        // lineWidth: 0,
+                        // zeroLineColor: "transparent",
+                        display: false,
+                      },
+                    },
+                  ],
+                },
+                elements: {
+                  line: {
+                    tension: 0,
+                  },
+                  point: {
+                    radius: 0,
+                  },
+                },
+              }}
+              legend={{
+                display: false,
+                position: "bottom",
+                labels: {
+                  usePointStyle: true,
+                  boxWidth: 50,
+                  font: {
+                    size: 17,
+                  },
+                },
+              }}
+            />
+          ) : (
+            ""
+          )}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={handleClose}>Close</Button>
+        </Modal.Footer>
+      </Modal>
+
+      {/* Total pop up */}
+      <Modal
+        show={modalShow2}
+        onHide={() => setModalShow2(false)}
+        size="xd"
+        // aria-labelledby="contained-modal-title-vcenter"
+        centered
+        dialogClassName="my-modal"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Total orders
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {items.length !== 0 ? (
+            <Bar
+              height={300}
+              width={1800}
+              data={{
+                labels: showDays ? days : time,
+                // labels: [
+                //   "feb",
+                //   "MAr",
+                //   "feb",
+                //   "MAr",
+                //   "feb",
+                //   "MAr",
+                //   "feb",
+                //   "MAr",
+                //   "feb",
+
+                //   "MAr",
+                // ],
+                datasets: [
+                  {
+                    label: "Total orders",
+                    data: showLatency,
+                    backgroundColor: "#FC7E09",
+                    borderRadius: 12,
+                  },
+
+                  // {
+                  //   label: "Lima Forecast",
+                  //   data: [200, 400],
+                  //   backgroundColor: "#707070",
+                  // },
+                  // {
+                  //   label: "EBIT",
+                  //   data: [100, 300],
+                  //   backgroundColor: "#9891AF",
+                  // },
+                ],
+              }}
+              options={{
+                tooltips: {
+                  callbacks: {
+                    title: function (tooltipItem, data) {
+                      return data["labels"][tooltipItem[0]["index"]];
+                    },
+                    label: function (tooltipItem, data) {
+                      let value;
+                      data["datasets"].forEach((d) => {
+                        // console.log(d['data'][tooltipItem['index']], tooltipItem);
+                        if (
+                          d["data"][tooltipItem["index"]] ===
+                          Number(tooltipItem.value)
+                        ) {
+                          value =
+                            "$ " + d["data"][tooltipItem["index"]].toFixed(2);
+                        }
+                      });
+                      // console.log(value);
+                      return value;
+                    },
+                    afterLabel: function (tooltipItem, data) {},
+                  },
+                  backgroundColor: "#FFF",
+                  borderWidth: 2,
+                  xPadding: 15,
+                  yPadding: 15,
+                  borderColor: "#ddd",
+                  titleFontSize: 16,
+                  titleFontColor: "#0066ff",
+                  bodyFontColor: "#000",
+                  bodyFontSize: 14,
+                  // displayColors: false,
+                },
+                cornerRadius: 20,
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                  yAxes: [
+                    {
+                      ticks: {
+                        // callback: function (value) {
+                        //   return "$ " + numeral(value).format("0.0a");
+                        // },
+                        stepSize: 250,
+                        beginAtZero: true,
+                      },
+                      gridLines: {
+                        borderDash: [2],
+                        zeroLineColor: "transparent",
+                        zeroLineWidth: 0,
+                        tickMarkLength: 15,
+                      },
+                    },
+                  ],
+                  xAxes: [
+                    {
+                      maxBarThickness: 40.9,
+                      barPercentage: 0.4,
+                      categoryPercentage: 0.4,
+                      // barThickness: 10,
+                      // barPercentage: 1,
+                      gridLines: {
+                        lineWidth: 0,
+                        zeroLineColor: "transparent",
+                      },
+                    },
+                  ],
+                },
+              }}
+              legend={{
+                display: true,
+                position: "bottom",
+                labels: {
+                  usePointStyle: true,
+                  boxWidth: 50,
+                },
+              }}
+            />
+          ) : (
+            ""
+          )}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={handleClose2}>Close</Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }
