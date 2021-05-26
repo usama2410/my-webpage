@@ -7,6 +7,7 @@ import {
   withRouter,
 } from "react-router-dom";
 import App from "./App";
+import Bar from "./Barchart";
 function routes(props) {
   return (
     <div>
@@ -14,6 +15,7 @@ function routes(props) {
         <React.Fragment>
           <Switch>
             <Route exact path="/" component={App} />
+            <Route exact path="/bar" component={Bar} />
           </Switch>
         </React.Fragment>
       </Router>

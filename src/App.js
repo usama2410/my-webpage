@@ -5,7 +5,7 @@ import axios from "axios";
 import moment from "moment";
 import { Button, Modal } from "react-bootstrap";
 // require("./RoundedBars");
-
+import { Chart } from "chart.js";
 function App() {
   const [items, setitems] = useState([]);
   const [hourData, setHourData] = useState([]);
@@ -68,7 +68,42 @@ function App() {
       : null
   );
 
-
+  var MyChart = new Chart({
+    type: "bar",
+    data: {
+      labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+      datasets: [
+        {
+          label: "# of Votes",
+          data: [12, 19, 3, 5, 2, 3],
+          backgroundColor: [
+            "rgba(255, 99, 132, 0.2)",
+            "rgba(54, 162, 235, 0.2)",
+            "rgba(255, 206, 86, 0.2)",
+            "rgba(75, 192, 192, 0.2)",
+            "rgba(153, 102, 255, 0.2)",
+            "rgba(255, 159, 64, 0.2)",
+          ],
+          borderColor: [
+            "rgba(255, 99, 132, 1)",
+            "rgba(54, 162, 235, 1)",
+            "rgba(255, 206, 86, 1)",
+            "rgba(75, 192, 192, 1)",
+            "rgba(153, 102, 255, 1)",
+            "rgba(255, 159, 64, 1)",
+          ],
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
   const handleClose = () => setModalShow(false);
   const handleClose2 = () => setModalShow2(false);
   // console.log("formatedDates", formatedDates);
@@ -184,13 +219,17 @@ function App() {
                 <div className="col-6 right">
                   <h3 className="chart-heading-right">
                     <div
-                      className="chart-btn-active"
+                      className={
+                        showDay ? "chart-btn-active" : "chart-btn-disable"
+                      }
                       onClick={() => setShowDay(true)}
                     >
                       Day
                     </div>
                     <div
-                      className="chart-btn-disable"
+                      className={
+                        showDay ? "chart-btn-disable" : "chart-btn-active"
+                      }
                       onClick={() => setShowDay(false)}
                     >
                       Hour
@@ -214,6 +253,7 @@ function App() {
 
                       datasets: [
                         {
+                          label: "Sale Value",
                           fill: false,
                           borderColor: "#626ed7",
                           backgroundColor: "#626ed7",
@@ -325,6 +365,7 @@ function App() {
                           label: "Total orders",
                           data: showLatency,
                           backgroundColor: "#FC7E09",
+                          borderRadius: 12,
                         },
 
                         // {
@@ -361,7 +402,7 @@ function App() {
                             // console.log(value);
                             return value;
                           },
-                          afterLabel: function (tooltipItem, data) { },
+                          afterLabel: function (tooltipItem, data) {},
                         },
                         backgroundColor: "#FFF",
                         borderWidth: 2,
@@ -601,7 +642,7 @@ function App() {
                               // console.log(value);
                               return value;
                             },
-                            afterLabel: function (tooltipItem, data) { },
+                            afterLabel: function (tooltipItem, data) {},
                           },
                           backgroundColor: "#FFF",
                           borderWidth: 2,
@@ -667,6 +708,7 @@ function App() {
                   <Button onClick={handleClose2}>Close</Button>
                 </Modal.Footer>
               </Modal>
+              <div></div>
             </div>
           </div>
         </div>
