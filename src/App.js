@@ -19,7 +19,7 @@ function App() {
         "https://brightlystake.com/api/getClusterDetails/0x81c986e7b8da828b5639be6d3e44ea83b33c05a2"
       )
       .then((res) => {
-        console.log(res.data.data);
+        // console.log(res.data.data);
         setitems(res.data.data);
 
         let latestObj =
@@ -42,9 +42,10 @@ function App() {
         console.log(err);
       });
   }, []);
-  console.log(items);
   let showLatency = [];
   let formatedDates = [];
+  let totalData = [];
+  let viewMoreFormattedDates = [];
   if (showDay) {
     dayData.map((f) =>
       f.latency <= items.length
@@ -60,6 +61,14 @@ function App() {
         : null
     );
   }
+  items.map((f) =>
+    f.latency <= items.length
+      ? (totalData.push(f.latency),
+        viewMoreFormattedDates.push(moment(f.time).format("dddd")))
+      : null
+  );
+
+
   const handleClose = () => setModalShow(false);
   const handleClose2 = () => setModalShow2(false);
   // console.log("formatedDates", formatedDates);
@@ -352,7 +361,7 @@ function App() {
                             // console.log(value);
                             return value;
                           },
-                          afterLabel: function (tooltipItem, data) {},
+                          afterLabel: function (tooltipItem, data) { },
                         },
                         backgroundColor: "#FFF",
                         borderWidth: 2,
@@ -431,7 +440,7 @@ function App() {
                       height={300}
                       width={1990}
                       data={{
-                        labels: ["feb", "dec", "gen"],
+                        labels: viewMoreFormattedDates,
                         datasets: [
                           {
                             label: "Sale value",
@@ -443,7 +452,7 @@ function App() {
                             pointBorderColor: "#55bae7",
                             pointHoverBackgroundColor: "#55bae7",
                             pointHoverBorderColor: "#55bae7",
-                            data: [22, 333, 333],
+                            data: totalData,
                             // data: [22, 66, 88, 99],
                             pointRadius: 0,
                           },
@@ -549,23 +558,11 @@ function App() {
                       height={300}
                       width={1800}
                       data={{
-                        labels: [
-                          "feb",
-                          "MAr",
-                          "feb",
-                          "MAr",
-                          "feb",
-                          "MAr",
-                          "feb",
-                          "MAr",
-                          "feb",
-
-                          "MAr",
-                        ],
+                        labels: viewMoreFormattedDates,
                         datasets: [
                           {
                             label: "Total orders",
-                            data: [22, 333, 333],
+                            data: totalData,
                             backgroundColor: "#FC7E09",
                             borderRadius: 12,
                           },
@@ -604,7 +601,7 @@ function App() {
                               // console.log(value);
                               return value;
                             },
-                            afterLabel: function (tooltipItem, data) {},
+                            afterLabel: function (tooltipItem, data) { },
                           },
                           backgroundColor: "#FFF",
                           borderWidth: 2,
