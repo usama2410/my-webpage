@@ -19,11 +19,17 @@
   text-align: center;
   cursor: pointer;
 }
+.table-scroll {
+  height: 700px;
+  overflow: scroll;
+}
 
 .modal-dialog {
   margin: 20px !important;
 }
-
+.modal-body {
+  width: 95vw !important;
+}
 .my-modal > .modal-content {
   width: 96vw !important; /* Occupy the 90% of the screen width */
   /* max-width: 90vw !important; */
@@ -87,10 +93,14 @@
 .Chart-card-line {
   background-color: #1a1e4d;
   color: white;
-  padding: 20px;
+  padding: 25px;
   border-radius: 5px;
   -webkit-box-shadow: 2px 3px 15px 2px rgba(0, 0, 0, 0.9);
   box-shadow: 2px 3px 15px 2px rgba(0, 0, 0, 0.9);
+}
+.table-header {
+  background: #fc7e09;
+  color: white;
 }
 .Chart-card-line-2 {
   background-color: white;
@@ -229,7 +239,7 @@
 }
 /* Cards */
 .card-1 {
-  width: 90%;
+  width: 97%;
   background-color: white;
   color: black;
   height: 104px;
@@ -238,10 +248,18 @@
   padding: 14px;
   margin-top: 10px;
 }
+.padding-none {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
 
+.padding-left-10 {
+  padding-left: 10px !important;
+  padding-right: 0px !important;
+}
 @media only screen and (max-width: 600px) {
   .main {
-    height: 80vh;
+    height: 85vh;
   }
   .postion {
     position: relative;
@@ -249,5 +267,35 @@
   .width {
     padding: 0%;
     width: 102%;
+    justify-content: center;
+    display: contents !important;
+  }
+  .graph-main {
+    justify-content: center;
+  }
+}
+@media only screen and (max-width: 1000px) and (min-width: 600px) {
+  .main {
+    height: 40vh;
+  }
+  .postion {
+    position: relative;
+  }
+  .width {
+    padding: 0%;
+    width: 102%;
+  }
+  .Chart-card-line-2 {
+    background-color: white;
+    color: black;
+    padding: 35px;
+    border-radius: 5px;
+    -webkit-box-shadow: 2px 3px 15px 2px rgba(0, 0, 0, 0.9);
+    box-shadow: 2px 3px 15px 2px rgba(0, 0, 0, 0.9);
+  }
+}
+@media only screen and (max-width: 2000px) and (min-width: 1600px) {
+  .card-1 {
+    width: 90%;
   }
 }

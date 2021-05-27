@@ -10,6 +10,7 @@ function App() {
   const [items, setitems] = useState([]);
   const [hourData, setHourData] = useState([]);
   const [dayData, setDayData] = useState([]);
+  const [tablemindata, settablemindata] = useState([]);
   const [showDay, setShowDay] = useState(true);
   const [modalShow, setModalShow] = useState(false);
   const [modalShow2, setModalShow2] = useState(false);
@@ -35,6 +36,17 @@ function App() {
           (f) => f.time.substr(11, 2) == latestObj?.time.substr(11, 2)
         );
 
+        // let tablemindata = res.data.data.filter(
+        //   (f) => f.time.slice(0, 5) == latestObj?.time.slice(0, 5)
+        // );
+        let mindata = res.data.data.filter((item, idx) => idx < 5);
+        console.log(mindata);
+        settablemindata(mindata);
+        console.log(tablemindata);
+
+        console.log(latestObj);
+
+        // settablemindata(tablemindata);
         setHourData(hourData);
         setDayData(dayData);
       })
@@ -42,15 +54,17 @@ function App() {
         console.log(err);
       });
   }, []);
+
   let showLatency = [];
   let formatedDates = [];
   let totalData = [];
   let viewMoreFormattedDates = [];
+
   if (showDay) {
     dayData.map((f) =>
       f.latency <= items.length
         ? (showLatency.push(f.latency),
-          formatedDates.push(moment(f.time).format("dddd")))
+          formatedDates.push(moment(f.time).format("MMM D YYYY HH:mm:ss")))
         : null
     );
   } else {
@@ -64,10 +78,20 @@ function App() {
   items.map((f) =>
     f.latency <= items.length
       ? (totalData.push(f.latency),
-        viewMoreFormattedDates.push(moment(f.time).format("dddd")))
+        viewMoreFormattedDates.push(
+          moment(f.time).format("MMM D YYYY HH:mm:ss")
+        ))
       : null
   );
-
+  //   items.map((f) =>
+  //   f.latency <= 10
+  //     ? (totalData.push(f.latency),
+  //       .push(
+  //     f.time
+  //       ))
+  //     : null
+  // );  console.log(items);
+  console.log(tablemindata);
   var MyChart = new Chart({
     type: "bar",
     data: {
@@ -113,19 +137,19 @@ function App() {
     <div className="App">
       <div className="main">
         <div className="row width">
-          <div className="col-lg-7 col-md-6 col-sm-12 col-xs-12">
+          <div className=" col-xl-7 col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div className="row">
               <div className="col-lg-4 col-md-6 col-sm-12 col-xs-12 center">
                 <div className="card-1">
                   <div className="row">
-                    <div className="col-8">
+                    <div className="col-8 padding-left-10">
                       <div className="card-name">Ticket Average</div>
                       <div className="card-number">350,897</div>
                       <div className="green-value">
                         3.48%<span className="card-date">Since last month</span>
                       </div>
                     </div>
-                    <div className="col-4 btn-align">
+                    <div className="col-4 btn-align padding-none">
                       <div className="payment-btn-five">payment</div>
                     </div>
                   </div>
@@ -135,7 +159,7 @@ function App() {
               <div className="col-lg-4 col-md-6 col-sm-12 col-xs-12 center">
                 <div className="card-1">
                   <div className="row">
-                    <div className="col-8">
+                    <div className="col-8 padding-left-10">
                       <div className="card-name">POND average</div>
                       <div className="card-number">924</div>
                       <div className="orange-value">
@@ -143,7 +167,7 @@ function App() {
                         <span className="card-date">Since last month</span>
                       </div>
                     </div>
-                    <div className="col-4 btn-align">
+                    <div className="col-4 btn-align padding-none">
                       <div className="payment-btn">payment</div>
                     </div>
                   </div>
@@ -152,7 +176,7 @@ function App() {
               <div className="col-lg-4 col-md-6 col-sm-12 col-xs-12 center">
                 <div className="card-1">
                   <div className="row">
-                    <div className="col-8">
+                    <div className="col-8 padding-left-10">
                       <div className="card-name">MPOND average</div>
                       <div className="card-number">2,897</div>
                       <div className="red-value">
@@ -160,7 +184,7 @@ function App() {
                         <span className="card-date">Since last month</span>
                       </div>
                     </div>
-                    <div className="col-4 btn-align">
+                    <div className="col-4 btn-align padding-none">
                       <div className="payment-btn-two">payment</div>
                     </div>
                   </div>
@@ -168,19 +192,19 @@ function App() {
               </div>
             </div>
           </div>
-          <div className="col-lg-5 col-md-6 col-sm-12 col-xs-12">
+          <div className="col-lg-5 col-md-12 col-sm-12 col-xs-12">
             <div className="row">
               <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12 center">
                 <div className="card-1">
                   <div className="row">
-                    <div className="col-8">
+                    <div className="col-8 padding-left-10">
                       <div className="card-name">Ranks</div>
                       <div className="card-number">49,89%</div>
                       <div className="green-value">
                         3.48%<span className="card-date">Since last month</span>
                       </div>
                     </div>
-                    <div className="col-4 btn-align">
+                    <div className="col-4 btn-align padding-none">
                       <div className="payment-btn-three">payment</div>
                     </div>
                   </div>
@@ -189,15 +213,15 @@ function App() {
               <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12 center">
                 {" "}
                 <div className="card-1">
-                  <div className="row">
-                    <div className="col-8">
+                  <div className="row ">
+                    <div className="col-8 padding-left-10">
                       <div className="card-name">fees</div>
                       <div className="card-number">750,897</div>
                       <div className="green-value">
                         3.48%<span className="card-date">Since last month</span>
                       </div>
                     </div>
-                    <div className="col-4 btn-align">
+                    <div className="col-4 btn-align padding-none">
                       <div className="payment-btn-four">payment</div>
                     </div>
                   </div>
@@ -212,11 +236,11 @@ function App() {
           <div className="col-lg-8 col-md-6 col-sm-12 col-xs-12 ">
             <div className="Chart-card-line ">
               <div className="row">
-                <div className="col-6">
+                <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                   <h3 className="chart-heading-overview">overview</h3>
                   <h3 className="chart-heading">Sales value</h3>
                 </div>
-                <div className="col-6 right">
+                <div className="col-lg-6 col-md-12 col-sm-12 col-xs-12 right">
                   <h3 className="chart-heading-right">
                     <div
                       className={
@@ -354,7 +378,7 @@ function App() {
                 </div>
               </div>
               <div>
-                {items.length !== 0 ? (
+                {/* {items.length !== 0 ? (
                   <Bar
                     height={300}
                     width={800}
@@ -457,6 +481,28 @@ function App() {
                       },
                     }}
                   />
+                ) : (
+                  ""
+                )} */}
+                {items.length !== 0 ? (
+                  <table class="table table-bordered">
+                    <thead className="table-header ">
+                      <tr>
+                        <th scope="col">Date/Time</th>
+                        <th scope="col">Latency</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {tablemindata.map((item, key) => {
+                        return (
+                          <tr>
+                            <th scope="row">{item.time}</th>
+                            <th>{item.latency}</th>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
                 ) : (
                   ""
                 )}
@@ -594,7 +640,34 @@ function App() {
                   </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                  {items.length !== 0 ? (
+                  <div className="table-scroll">
+                    <table class="table table-bordered">
+                      <thead className="table-header ">
+                        <tr>
+                          <th scope="col">Clusture Name</th>
+                          <th scope="col">Latency</th>
+                          <th scope="col">Relayers</th>
+                          <th scope="col">Tickets</th>
+                          <th scope="col">Time</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {items.map((item, keys) => {
+                          return (
+                            <tr>
+                              <th scope="row">{item.clusterName}</th>
+                              <td>{item.latency}</td>
+                              <td>{item.relayers}</td>
+                              <td>{item.tickets}</td>
+                              <td>{item.time}</td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+
+                  {/* {items.length !== 0 ? (
                     <Bar
                       height={300}
                       width={1800}
@@ -702,7 +775,7 @@ function App() {
                     />
                   ) : (
                     ""
-                  )}
+                  )} */}
                 </Modal.Body>
                 <Modal.Footer>
                   <Button onClick={handleClose2}>Close</Button>
